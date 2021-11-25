@@ -1,21 +1,24 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 
-import NewRecord from "./components/NewRecord/NewRecord";
-import Records from "./components/Records/Records";
+import AddUser from './components/Users/AddUser';
+import UsersList from './components/Users/UsersList';
 
 function App() {
-  const [records, setRecords] = useState([]);
+  const [usersList, setUsersList] = useState([]);
 
-  const addRecordHandler = (record) => {
-    setRecords((prevRecords) => {
-      return [record, ...prevRecords];
+  const addUserHandler = (uName, uAge) => {
+    setUsersList((prevUsersList) => {
+      return [
+        ...prevUsersList,
+        { name: uName, age: uAge, id: Math.random().toString() },
+      ];
     });
   };
 
   return (
     <div>
-      <NewRecord onAddRecord={addRecordHandler} />
-      <Records items={records} />
+      <AddUser onAddUser={addUserHandler} />
+      <UsersList users={usersList} />
     </div>
   );
 }
